@@ -1,3 +1,3 @@
-# javascript-calculator
+# JavaScript Calculator
 
 A JavaScript-based pocket calculator...
