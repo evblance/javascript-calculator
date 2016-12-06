@@ -1,0 +1,156 @@
+body {
+  background-color: grey;
+  font-family: 'Aldrich', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px auto 20px auto;
+}
+
+/* calculator elements */
+
+#display-area {
+  background-color: #33241F;
+  border: 2px solid grey;
+  border-radius: 5%;
+  margin: 25px auto 10px auto;
+  width: 280px;
+  height: 50px;
+  mix-blend-mode: exclusion;
+}
+
+#display {
+  font-family: 'Press Start 2P', sans-serif;
+  font-size: 20px;
+  text-align: right;
+  line-height: 55px;
+  padding-right: 5px;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#calculator-body {
+  background-color:  #ffe6e9; /*#FF99A6;*/
+  border: 5px solid white;/*#993E1F;*/
+  border-radius: 5%;
+  display: black;
+  margin: 0 auto;
+  width: 320px;
+  height: 480px;
+  box-shadow: 0px 1px 15px 2px;
+}
+
+#instructions {
+  background-color: #9D9D9D;
+  border-radius: 10px;
+  padding: 10px 10px 10px 15px;
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  font-family: 'Exo 2', serif;
+  font-size: 20px;
+  font-weight: 900;
+  border: 2px solid white;
+  border-radius: 10px;
+  text-align: center;
+  padding: auto;
+  margin: 4px 4px 4px 4px;
+  width: 40px;
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 3px 2px 5px 1px #4D4D4D;
+  transition: 0.5s;
+}
+
+.button-wide {
+  width: 92px;
+  border-radius: 10px;
+}
+
+.button-digit {
+  color: #8C6254;
+  background-color: #FFB399;
+}
+
+.button-special {
+  color: #DCFFD9;
+  background-color: #93CC66;
+}
+
+.button-mod {
+  color: #75462A;
+  background-color: #FF995B;
+}
+
+.button-cramped {
+  font-size: 16px;
+}
+
+.button-operator {
+  color: white;
+  background-color: #8EC8FF;
+  font-family: 'Orbitron', serif;
+  font-weight: 900;
+}
+/*
+.switch {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 18px;
+  height: 18px;
+  border: 2px solid white;
+  border-radius: 9px;
+  cursor: pointer;
+  box-shadow: 3px 2px 5px 1px #4D4D4D;
+  transition: 0.5s;
+}
+
+.slider-socket {
+  margin
+}
+
+.slider-socket input {
+  display: none;
+}
+
+.slider-socket {
+  position: relative;
+  display: inline-block;
+  width: 42px;
+  height: 22px;
+  border-radius: 9px;
+  background-color: black;
+}
+*/
+.table-controls {
+  border-spacing: 0px;
+  border-collapse: collapse;
+  padding: 0px 0px 0px 0px;
+  margin: 45px auto 0px auto;
+}
+
+/* instructions */
+
+.list-item-point {
+  list-style: circle;
+}
+
+.list-item-description {
+  list-style: none;
+  display: inline-block;
+  padding-left: 10px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background-color: #AFAFAF;
+  border: 1px dashed black;
+  border-radius: 5px;
+}
