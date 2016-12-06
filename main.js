@@ -1,8 +1,20 @@
+ /*
+ *  IDEAS FOR IMPROVEMENT: 
+ * - If user enters an operator, but then selects another one
+ *   instead of a number, remove the previous operator from the stack and
+ *   add new operator instead.
+ * - Make the calculator stretch out 
+ *   and add scientific buttons if the user
+ *   toggles an option switch
+ * - Make brackets buttons to be able to specify order of operations
+ *
+ */
 
 var activeColour = 'grey';
 var inactiveColour = 'white';
 
 var Calculator = {
+  on: false,
   workingBuffer: [],
   displayReadout: [],
   lastAnswer: undefined,
@@ -176,6 +188,9 @@ var Calculator = {
       case 'key-ce':
         return 'CE';
       case 'key-ac':
+        if ( Calculator.on === false ) {
+          Calculator.on = true;
+        }
         return 'AC';
       case 'key-answer':
         return 'Ans';
@@ -508,7 +523,9 @@ $(document).ready(function() {
   $('.button').on('click', function() {
     var input = Calculator.parseInput(this.id);
     console.log(Calculator.workingBuffer);
-    Calculator.respondToInput(input);
+    if ( Calculator.on === true ) {
+      Calculator.respondToInput(input);
+    }
     if ( !$(this).hasClass('button-mod') || input === "M" ) {
       Calculator.refreshDisplay();
     }
