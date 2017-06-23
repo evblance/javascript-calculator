@@ -1,118 +1,125 @@
-<html>
-  <head>
-    <title>JavaScript Calculator</title>
-    <!-- font for digital display -->
-    <link href='https://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
-    <!-- font for keypad -->
-    <link href='https://fonts.googleapis.com/css?family=Exo+2:400,900' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Orbitron:400,900' rel='stylesheet' type='text/css'>
-    <!-- font for text -->
-    <link href='https://fonts.googleapis.com/css?family=Aldrich' rel='stylesheet' type='text/css'>
-    <!-- stylesheet -->
-    <link href="./main.css" rel="stylesheet" type="text/css">
-    <!-- external includes -->
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>   
-    <!-- javascript -->
-    <script src="main.js"></script>
-    
-    
-  </head>
-  <body>
-    <h1>JAVASCRIPT CALCULATOR</h1>
-    
-    <div id='calculator-body'>
-      
-      <div id='display-area'>
-        
-        <div id='display'><!-- Calculator output --></div>
-          
-      </div>
-      <!--
-      <div class='slider-socket'>
-        <input type='checkbox'>
-        <div class='switch'></div>
-      </div>
-      -->  
-      <div id='controls-wrapper'>
-        <table class='table-controls'>
-          <tr>
-            <td><div id='key-ac' class='button button-special'>AC</div></td>
-            <td><div id='key-ce' class='button button-special'>CE</div></td>
-            <td colspan='2'><div id='key-shift' class='button button-wide button-mod'>SHIFT</div></td>
-          </tr>
-          <tr>
-            <td><div id='key-exp' class='button button-mod button-cramped'>Exp</div></td>
-            <td><div id='key-percent' class='button button-mod'>%</div></td>
-            <td><div id='key-mem' class='button button-mod'>M</div></td>
-            <td><div id='key-divide' class='button button-operator'>&divide;</div></td>
-          </tr>
-          <tr>
-            <td><div id='key-7' class='button button-digit'>7</div></td>
-            <td><div id='key-8' class='button button-digit'>8</div></td>
-            <td><div id='key-9' class='button button-digit'>9</div></td>
-            <td><div id='key-multiply' class='button button-operator'>x</div></td>
-          </tr>
-          <tr>
-            <td><div id='key-4' class='button button-digit'>4</div></td>
-            <td><div id='key-5' class='button button-digit'>5</div></td>
-            <td><div id='key-6' class='button button-digit'>6</div></td>
-            <td><div id='key-subtract' class='button button-operator'>-</div></td>
-          </tr>
-          <tr>
-            <td><div id='key-1' class='button button-digit'>1</div></td>
-            <td><div id='key-2' class='button button-digit'>2</div></td>
-            <td><div id='key-3' class='button button-digit'>3</div></td>
-            <td><div id='key-add' class='button button-operator'>+</div></td>
-          </tr>
-          <tr>
-            <td><div id='key-0' class='button button-digit'>0</div></td>
-            <td><div id='key-period' class='button button-digit'>.</div></td>
-            <td><div id='key-answer' class='button button-mod button-cramped'>Ans</div></td>
-            <td><div id='key-compute' class='button button-operator'>=</div></td>
-          </tr>
-        </table>
-      </div>
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <title>JavaScript Calculator</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Exo+2|Orbitron|Aldrich|Damion" rel="stylesheet">
+  <link href="./main.css" rel="stylesheet">
+
+</head>
+
+<body>
+  <h1>JAVASCRIPT CALCULATOR</h1>
+  <div id="calculator-body">
+<!--
+    <div class="switch-container">
+      <input id="sci-switch" type="checkbox">
+      <label for="sci-switch" class="switch">
+    </div>
+-->
+
+    <div id="display-area">
+      <div id="display"><!-- Calculator display readout --></div>
+      <div id="buffer"><!-- Calculator working buffer --></div>
     </div>
 
-    <!-- eventually implement a show/hide feature? -->
-    <div id='instructions-wrapper'>
-      <div id='instructions'>
-        <h2>INSTRUCTIONS</h2>
-        <h3>Memory function</h3>
-        <p>Press&nbsp;&lt;&nbsp;SHIFT&nbsp;&gt;&nbsp;followed by&nbsp;&lt;&nbsp;M&nbsp;&gt;&nbsp;to load current result displayed into the memory.</p>
-        <p>Press&nbsp;&lt;&nbsp;M&nbsp;&gt;&nbsp;to recall number stored in memory for calculation.</p>
-        <p>Press&nbsp;&lt;&nbsp;SHIFT&nbsp;&gt;&nbsp;followed by&nbsp;&lt;&nbsp;CE&nbsp;&gt;&nbsp;to clear the memory (for the pendantic).</p>
-        <h3>Exponential function</h3>
-        <p>To enter a number such as eg. 1.23 x 10^4 press &nbsp;&lt;&nbsp;1&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;.&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;2&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;3&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;Exp&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;4&nbsp;&gt;&nbsp;.</p>
-        <h3>Answer function</h3>
-        <p>Press&nbsp;&lt;&nbsp;Ans&nbsp;&gt;&nbsp;to use the answer from previous computation in the current one.
-        <h3>Percentage function</h3>
-        <p>Enter an expression followed by&nbsp;&lt;&nbsp;SHIFT&nbsp;&gt;&nbsp;and then &nbsp;&lt;&nbsp;%&nbsp;&gt;&nbsp;to use percentages in the following manner:</p>
-        <ul class='list-instructions'>
-          <li class='list-item-point'>
-            <p>Calculate three quarters as a percentage&nbsp;|&nbsp;Result: 75 (%)</p>
-            <li class='list-item-description'>3&nbsp;&lt;&nbsp;&divide;&nbsp;&gt;&nbsp;4&nbsp;&lt;&nbsp;SHIFT&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;%&nbsp;&gt;&nbsp;</li>
-          </li>
-          <li class='list-item-point'>
-            <p>Calculate 17.5% of $250.00&nbsp;|&nbsp;Result: ($) 43.75</p>
-            <li class='list-item-description'>250 &nbsp;&lt;&nbsp;x&nbsp;&gt;&nbsp;17.5&nbsp;&lt;&nbsp;SHIFT&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;%&nbsp;&gt;&nbsp;</li>
-          </li>
-          <li class='list-item-point'>
-            <p>Calculate 12% mark-up on $250.00&nbsp;|&nbsp;Result: ($) 280</p>
-          <li class='list-item-description'>  &nbsp;250&nbsp;&lt;&nbsp;+&nbsp;&gt;&nbsp;12&nbsp;&lt;&nbsp;SHIFT&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;%&nbsp;&gt;&nbsp;</li>
-          </li>
-          <li class='list-item-point'>
-            <p>Give 10% discount on goods costing $150&nbsp;|&nbsp;Result: ($) 135</p>
-            <li class='list-item-description'>150 &nbsp;&lt;&nbsp;-&nbsp;&gt;&nbsp;10&nbsp;&lt;&nbsp;SHIFT&nbsp;&gt;&nbsp;&nbsp;&lt;&nbsp;%&nbsp;&gt;&nbsp;</li>
-          </li>
-        </ul>
-            
-        
-      </div>
-    </div>
-    
-   
-    
-  </body>
+    <div id="controls-wrapper">
+      <!-- <div class="replay-button-container">
+        <div id="replay-left" class="button button-replay button-replay-left">←</div>
+        <div id="replay-right" class=" button button-replay button-replay-right">→</div>
+      </div> -->
+      <table class="controls-table">
+        <tr>
+          <td colspan=2><div id="key-shift" class="button button-wide button-mod">SHIFT</div></td>
+          <td><div id="key-del" class="button button-special button-cramped">DEL</div></td>
+          <td><div id="key-ac" class="button button-special">AC</div></td>
+        </tr>
+        <tr>
+          <td><div id="key-exp" class="button button-mod button-cramped">Exp</div></td>
+          <td><div id="key-percent" class="button button-mod">%</div></td>
+          <td><div id="key-mem" class="button button-mod">M</div></td>
+          <td><div id="key-divide" class="button button-operator">&divide;</div></td>
+        </tr>
+        <tr>
+          <td><div id="key-7" class="button button-digit">7</div></td>
+          <td><div id="key-8" class="button button-digit">8</div></td>
+          <td><div id="key-9" class="button button-digit">9</div></td>
+          <td><div id="key-multiply" class="button button-operator">x</div></td>
+        </tr>
+        <tr>
+          <td><div id="key-4" class="button button-digit">4</div></td>
+          <td><div id="key-5" class="button button-digit">5</div></td>
+          <td><div id="key-6" class="button button-digit">6</div></td>
+          <td><div id="key-subtract" class="button button-operator">-</div></td>
+        </tr>
+        <tr>
+          <td><div id="key-1" class="button button-digit">1</div></td>
+          <td><div id="key-2" class="button button-digit">2</div></td>
+          <td><div id="key-3" class="button button-digit">3</div></td>
+          <td><div id="key-add" class="button button-operator">+</div></td>
+        </tr>
+        <tr>
+          <td><div id="key-0" class="button button-digit">0</div></td>
+          <td><div id="key-period" class="button button-digit">.</div></td>
+          <td><div id="key-answer" class="button button-mod button-cramped">Ans</div></td>
+          <td><div id="key-compute" class="button button-operator">=</div></td>
+        </tr>
+      </table><!-- .table-controls -->
+    </div><!-- #controls-wrapper -->
+  </div><!-- #calculator-body -->
+
+  <!-- eventually implement a show/hide feature? -->
+  <div id="instructions-wrapper">
+    <div id="instructions" class="instructions">
+      <h2>INSTRUCTION MANUAL</h2>
+      <h3>Powering On</h3>
+      <p>Press < AC > to turn the calculator on. It will turn off automatically after 60 seconds of inactivity.</p>
+      <!--<h3>Scientific Mode</h3>
+      <p>Toggle STD/SCI switch to enable/disable scientific mode.</p>-->
+      <!-- <h3>Replay function</h3>
+      <p>Use the replay keys to move the cursor and navigate the expression in working buffer.</p> -->
+      <h3>Memory function</h3>
+      <p>Press&nbsp;<&nbsp;SHIFT&nbsp;>&nbsp;<&nbsp;M&nbsp;>&nbsp;to load current result displayed into the memory.</p>
+      <p>Press&nbsp;<&nbsp;M&nbsp;>&nbsp;to recall number stored in memory for calculation.</p>
+      <p>Press&nbsp;<&nbsp;SHIFT&nbsp;>&nbsp;<&nbsp;CE&nbsp;>&nbsp;to clear the memory.</p>
+      <!--<h3>Additive inversion function</h3>
+      <p>Explicit negative values can be entered by first pressing < SHIFT > < - >, followed by the desired value.</p> -->
+      <h3>Scientific exponent function</h3>
+      <p>To enter a number such as eg. 1.23 x 10^4 press &nbsp;<&nbsp;1&nbsp;>&nbsp;&nbsp;<&nbsp;.&nbsp;>&nbsp;&nbsp;<&nbsp;2&nbsp;>&nbsp;&nbsp;<&nbsp;3&nbsp;>&nbsp;&nbsp;<&nbsp;Exp&nbsp;>&nbsp;&nbsp;<&nbsp;4&nbsp;>&nbsp;.</p>
+      <h3>Previous Answer function</h3>
+      <p>Press&nbsp;<&nbsp;Ans&nbsp;>&nbsp;to use the answer from previous computation in a new computation. Similarly, pressing an operator button after a calculation will preload the previous answer into the working expression, followed by the operator.
+      <h3>Percentage function</h3>
+      <p>Enter an expression followed by&nbsp;<&nbsp;%&nbsp;>&nbsp;to evaluate precentages as follows:</p>
+      <ul class="list-instructions">
+        <li class="list-item-point">
+          <p>Calculate three quarters as a percentage&nbsp;|&nbsp;Result: 75 (%)</p>
+          <li class="list-item-description">3&nbsp;<&nbsp;&divide;&nbsp;>&nbsp;4&nbsp;<&nbsp;%&nbsp;>&nbsp;</li>
+        </li>
+        <li class="list-item-point">
+          <p>Calculate 17.5% of $250.00&nbsp;|&nbsp;Result: ($) 43.75</p>
+          <li class="list-item-description">250 &nbsp;<&nbsp;x&nbsp;>&nbsp;17.5&nbsp;<&nbsp;%&nbsp;>&nbsp;</li>
+        </li>
+        <li class="list-item-point">
+          <p>Calculate 12% mark-up on $250.00&nbsp;|&nbsp;Result: ($) 280</p>
+        <li class="list-item-description">  &nbsp;250&nbsp;<&nbsp;+&nbsp;>&nbsp;12&nbsp;<&nbsp;%&nbsp;>&nbsp;</li>
+        </li>
+        <li class="list-item-point">
+          <p>Give 10% discount on goods costing $150&nbsp;|&nbsp;Result: ($) 135</p>
+          <li class="list-item-description">150 &nbsp;<&nbsp;-&nbsp;>&nbsp;10&nbsp;<&nbsp;%&nbsp;>&nbsp;</li>
+        </li>
+      </ul><!-- .list-instructions -->
+    </div><!-- #instructions -->
+  </div><!-- #instructions-wrapper -->
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="main.js"></script>
+
+</body>
+
 </html>
